@@ -12,7 +12,10 @@ glide get http://github.com/nadilas/goszamlazz
 ```go
 package main
 
-import "github.com/nadilas/goszamlazz
+import (
+    "github.com/nadilas/goszamlazz
+    "github.com/nadilas/goszamlazz/constants"
+)
 
 ```
 
@@ -106,9 +109,9 @@ You can create an invoice with the instances created above:
 
 ```go
 invoice := szamlazz.Invoice{
-	paymentMethod: szamlazz.PaymentMethod.BankTransfer, // optional, default: BankTransfer
-	currency: szamlazz.Currency.Ft, // optional, default: Ft
-	language: szamlazz.Language.Hungarian, // optional, default: Hungarian
+	paymentMethod: szamlazz.constants.BankTransfer, // optional, default: BankTransfer
+	currency: szamlazz.constants.Ft, // optional, default: Ft
+	language: szamlazz.constants.Hungarian, // optional, default: hu
 	seller: seller, // required
 	buyer: buyer, // required
 	items: []szamlazz.Item{soldItem1}
@@ -135,9 +138,9 @@ if result.pdf != nil {
 The following payment methods are supported by szamlazz.hu:
 
 ```
-szamlazz.PaymentMethod.Cash
-szamlazz.PaymentMethod.BankTransfer
-szamlazz.PaymentMethod.CreditCard
+constants.Cash
+contants.BankTransfer
+constants.CreditCard
 ```
 
 ### Currency
@@ -145,33 +148,33 @@ szamlazz.PaymentMethod.CreditCard
 The following currencies are recognized by szamlazz.hu:
 
 ```
-szamlazz.Currency.Ft
-szamlazz.Currency.HUF
-szamlazz.Currency.EUR
-szamlazz.Currency.CHF
-szamlazz.Currency.USD
-szamlazz.Currency.AUD
-szamlazz.Currency.AED
-szamlazz.Currency.BGN
-szamlazz.Currency.CAD
-szamlazz.Currency.CNY
-szamlazz.Currency.CZK
-szamlazz.Currency.DKK
-szamlazz.Currency.EEK
-szamlazz.Currency.GBP
-szamlazz.Currency.HRK
-szamlazz.Currency.ISK
-szamlazz.Currency.JPY
-szamlazz.Currency.LTL
-szamlazz.Currency.LVL
-szamlazz.Currency.NOK
-szamlazz.Currency.NZD
-szamlazz.Currency.PLN
-szamlazz.Currency.RON
-szamlazz.Currency.RUB
-szamlazz.Currency.SEK
-szamlazz.Currency.SKK
-szamlazz.Currency.UAH
+constants.Ft
+constants.HUF
+constants.EUR
+constants.CHF
+constants.USD
+constants.AUD
+constants.AED
+constants.BGN
+constants.CAD
+constants.CNY
+constants.CZK
+constants.DKK
+constants.EEK
+constants.GBP
+constants.HRK
+constants.ISK
+constants.JPY
+constants.LTL
+constants.LVL
+constants.NOK
+constants.NZD
+constants.PLN
+constants.RON
+constants.RUB
+constants.SEK
+constants.SKK
+constants.UAH
 ```
 
 ### Language
@@ -179,10 +182,10 @@ szamlazz.Currency.UAH
 The accepted languages are:
 
 ```
-szamlazz.Currency.Hungarian
-szamlazz.Currency.English
-szamlazz.Currency.German
-szamlazz.Currency.Italian
-szamlazz.Currency.Romanian
-szamlazz.Currency.Slovak
+constants.Hungarian
+constants.English
+constants.German
+constants.Italian
+constants.Romanian
+constants.Slovak
 ```
