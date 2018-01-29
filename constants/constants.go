@@ -38,7 +38,7 @@ func (curr ECurrency) String() string {
 }
 
 func (curr ECurrency) Value () string {
-	return Currencies[curr].shortcode
+	return Currencies[curr].Shortcode
 }
 
 // the currency constants
@@ -73,9 +73,9 @@ const (
 )
 
 type Currency struct {
-	shortcode     string
-	roundPriceExp int
-	name          string
+	Shortcode     string
+	RoundPriceExp int
+	Name          string
 }
 
 type ELanguage int
@@ -94,7 +94,7 @@ func (lang ELanguage) String() string {
 }
 
 func (lang ELanguage) Value () string {
-	return Languages[lang].isoCountryCode
+	return Languages[lang].IsoCountryCode
 }
 
 // the language constants
@@ -108,8 +108,8 @@ const (
 )
 
 type Language struct {
-	isoCountryCode string
-	name           string
+	IsoCountryCode string
+	Name           string
 }
 
 type EPaymentMethod int
@@ -129,11 +129,11 @@ func (p EPaymentMethod) Object () PaymentMethod {
 }
 
 func (p EPaymentMethod) Name () string {
-	return PaymentMethods[p].name
+	return PaymentMethods[p].Name
 }
 
 func (p EPaymentMethod) Value () string {
-	return PaymentMethods[p].value
+	return PaymentMethods[p].Value
 }
 
 // the payment method constants
@@ -144,38 +144,38 @@ const (
 )
 
 type PaymentMethod struct {
-	value string
-	name  string
+	Value string
+	Name  string
 }
 
 var Currencies = map[ECurrency]Currency{
-	Ft:  {shortcode: Ft.String(), roundPriceExp: 0, name: "Hungarian Forint"},
-	HUF: {shortcode: HUF.String(), roundPriceExp: 0, name: "Hungarian Forint"},
-	EUR: {shortcode: EUR.String(), roundPriceExp: 2, name: "Euro"},
-	CHF: {shortcode: CHF.String(), roundPriceExp: 2, name: "Swiss Franc"},
-	USD: {shortcode: USD.String(), roundPriceExp: 2, name: "US Dollar"},
-	AUD: {shortcode: AUD.String(), roundPriceExp: 2, name: "Australian Dollar"},
-	AED: {shortcode: AED.String(), roundPriceExp: 2, name: "Emirati Dirham"},
-	BGN: {shortcode: BGN.String(), roundPriceExp: 2, name: "Bulgarian Lev"},
-	CAD: {shortcode: CAD.String(), roundPriceExp: 2, name: "Canadian Dollar"},
-	CNY: {shortcode: CNY.String(), roundPriceExp: 2, name: "Chinese Yuan Renminbi"},
-	CZK: {shortcode: CZK.String(), roundPriceExp: 2, name: "Czech Koruna"},
-	DKK: {shortcode: DKK.String(), roundPriceExp: 2, name: "Danish Krone"},
-	EEK: {shortcode: EEK.String(), roundPriceExp: 2, name: "Estonian Kroon"},
-	GBP: {shortcode: GBP.String(), roundPriceExp: 2, name: "British Pound"},
-	HRK: {shortcode: HRK.String(), roundPriceExp: 2, name: "Croatian Kuna"},
-	ISK: {shortcode: ISK.String(), roundPriceExp: 2, name: "Icelandic Krona"},
-	JPY: {shortcode: JPY.String(), roundPriceExp: 2, name: "Japanese Yen"},
-	LTL: {shortcode: LTL.String(), roundPriceExp: 2, name: "Lithuanian Litas"},
-	LVL: {shortcode: LVL.String(), roundPriceExp: 2, name: "Latvian Lats"},
-	NOK: {shortcode: NOK.String(), roundPriceExp: 2, name: "Norwegian Krone"},
-	NZD: {shortcode: NZD.String(), roundPriceExp: 2, name: "New Zealand Dollar"},
-	PLN: {shortcode: PLN.String(), roundPriceExp: 2, name: "Polish Zloty"},
-	RON: {shortcode: RON.String(), roundPriceExp: 2, name: "Romanian New Leu"},
-	RUB: {shortcode: RUB.String(), roundPriceExp: 2, name: "Russian Ruble"},
-	SEK: {shortcode: SEK.String(), roundPriceExp: 2, name: "Swedish Krona"},
-	SKK: {shortcode: SKK.String(), roundPriceExp: 2, name: "Slovak Koruna"},
-	UAH: {shortcode: UAH.String(), roundPriceExp: 2, name: "Ukrainian Hryvnia"},
+	Ft:  {Shortcode: Ft.String(), RoundPriceExp: 0, Name: "Hungarian Forint"},
+	HUF: {Shortcode: HUF.String(), RoundPriceExp: 0, Name: "Hungarian Forint"},
+	EUR: {Shortcode: EUR.String(), RoundPriceExp: 2, Name: "Euro"},
+	CHF: {Shortcode: CHF.String(), RoundPriceExp: 2, Name: "Swiss Franc"},
+	USD: {Shortcode: USD.String(), RoundPriceExp: 2, Name: "US Dollar"},
+	AUD: {Shortcode: AUD.String(), RoundPriceExp: 2, Name: "Australian Dollar"},
+	AED: {Shortcode: AED.String(), RoundPriceExp: 2, Name: "Emirati Dirham"},
+	BGN: {Shortcode: BGN.String(), RoundPriceExp: 2, Name: "Bulgarian Lev"},
+	CAD: {Shortcode: CAD.String(), RoundPriceExp: 2, Name: "Canadian Dollar"},
+	CNY: {Shortcode: CNY.String(), RoundPriceExp: 2, Name: "Chinese Yuan Renminbi"},
+	CZK: {Shortcode: CZK.String(), RoundPriceExp: 2, Name: "Czech Koruna"},
+	DKK: {Shortcode: DKK.String(), RoundPriceExp: 2, Name: "Danish Krone"},
+	EEK: {Shortcode: EEK.String(), RoundPriceExp: 2, Name: "Estonian Kroon"},
+	GBP: {Shortcode: GBP.String(), RoundPriceExp: 2, Name: "British Pound"},
+	HRK: {Shortcode: HRK.String(), RoundPriceExp: 2, Name: "Croatian Kuna"},
+	ISK: {Shortcode: ISK.String(), RoundPriceExp: 2, Name: "Icelandic Krona"},
+	JPY: {Shortcode: JPY.String(), RoundPriceExp: 2, Name: "Japanese Yen"},
+	LTL: {Shortcode: LTL.String(), RoundPriceExp: 2, Name: "Lithuanian Litas"},
+	LVL: {Shortcode: LVL.String(), RoundPriceExp: 2, Name: "Latvian Lats"},
+	NOK: {Shortcode: NOK.String(), RoundPriceExp: 2, Name: "Norwegian Krone"},
+	NZD: {Shortcode: NZD.String(), RoundPriceExp: 2, Name: "New Zealand Dollar"},
+	PLN: {Shortcode: PLN.String(), RoundPriceExp: 2, Name: "Polish Zloty"},
+	RON: {Shortcode: RON.String(), RoundPriceExp: 2, Name: "Romanian New Leu"},
+	RUB: {Shortcode: RUB.String(), RoundPriceExp: 2, Name: "Russian Ruble"},
+	SEK: {Shortcode: SEK.String(), RoundPriceExp: 2, Name: "Swedish Krona"},
+	SKK: {Shortcode: SKK.String(), RoundPriceExp: 2, Name: "Slovak Koruna"},
+	UAH: {Shortcode: UAH.String(), RoundPriceExp: 2, Name: "Ukrainian Hryvnia"},
 }
 
 var Languages = map[ELanguage]Language{

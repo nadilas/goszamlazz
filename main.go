@@ -26,10 +26,10 @@ func main() {
 
 	}
 	in, err := NewInvoice(InvoiceOptions{
-		paymentMethod: constants.Cash,
-		seller: seller,
-		buyer: buyer,
-		items: []Item{soldItem1},
+		PaymentMethod: constants.Cash,
+		Seller:        seller,
+		Buyer:         buyer,
+		Items:         []Item{soldItem1},
 	})
 	if err != nil {
 		log.Fatal(err)

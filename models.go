@@ -30,26 +30,26 @@ type Item struct {
 }
 
 type InvoiceOptions struct {
-	paymentMethod   constants.EPaymentMethod
-	currency        constants.ECurrency
-	language        constants.ELanguage
-	seller          Seller
-	buyer           Buyer
-	items           []Item
-	issueDate       time.Time
-	fulfillmentDate time.Time
-	dueDate         time.Time
-	comment         string
-	orderNumber		string
-	proforma		bool
-	invoiceIdPrefix	string
-	paid			bool
+	PaymentMethod   constants.EPaymentMethod
+	Currency        constants.ECurrency
+	Language        constants.ELanguage
+	Seller          Seller
+	Buyer           Buyer
+	Items           []Item
+	IssueDate       time.Time
+	FulfillmentDate time.Time
+	DueDate         time.Time
+	Comment         string
+	OrderNumber     string
+	Proforma        bool
+	InvoiceIdPrefix string
+	Paid            bool
 }
 
 var defaultInvoiceOptions = InvoiceOptions{
-	paymentMethod: constants.BankTransfer,
-	currency:      constants.Ft,
-	language:      constants.Hungarian,
+	PaymentMethod: constants.BankTransfer,
+	Currency:      constants.Ft,
+	Language:      constants.Hungarian,
 }
 
 type Invoice struct {
@@ -79,16 +79,16 @@ func NewInvoice(opts InvoiceOptions) (*Invoice, error) {
 		return nil, err
 	}
 
-	if i.options.issueDate.IsZero() {
-		i.options.issueDate = time.Now()
+	if i.options.IssueDate.IsZero() {
+		i.options.IssueDate = time.Now()
 	}
 
-	if i.options.fulfillmentDate.IsZero() {
-		i.options.fulfillmentDate = time.Now()
+	if i.options.FulfillmentDate.IsZero() {
+		i.options.FulfillmentDate = time.Now()
 	}
 
-	if i.options.dueDate.IsZero() {
-		i.options.dueDate = time.Now()
+	if i.options.DueDate.IsZero() {
+		i.options.DueDate = time.Now()
 	}
 
 	return i, nil
@@ -102,11 +102,11 @@ func (in *Invoice) generateXML() (error, string) {
 		return err, ""
 	}
 
-	err, buyerString := in.options.buyer.generateXML()
+	err, buyerString := in.options.Buyer.generateXML()
 	if err != nil {
 		return err, ""
 	}
-	err, sellerString := in.options.seller.generateXML()
+	err, sellerString := in.options.Seller.generateXML()
 	if err != nil {
 		return err, ""
 	}
@@ -126,21 +126,21 @@ func (in *Invoice) getItemsXML() string {
 func (in *Invoice) getHeader() (InvoiceHeader) {
 	return InvoiceHeader{
 		XMLName:         xml.Name{Local: "fejlec"},
-		issueDate:       in.options.issueDate,
-		fulfillmentDate: in.options.fulfillmentDate,
-		dueDate:         in.options.dueDate,
-		paymentMethod:   in.options.paymentMethod.Value(),
-		currency:        in.options.currency.Value(),
-		language:        in.options.language.Value(),
-		comment:         in.options.comment,
+		issueDate:       in.options.IssueDate,
+		fulfillmentDate: in.options.FulfillmentDate,
+		dueDate:         in.options.DueDate,
+		paymentMethod:   in.options.PaymentMethod.Value(),
+		currency:        in.options.Currency.Value(),
+		language:        in.options.Language.Value(),
+		comment:         in.options.Comment,
 		// exchangeRateBank:	?
 		// exchangeRate:	?
-		orderNumber:	 in.options.orderNumber,
+		orderNumber:	 in.options.OrderNumber,
 		// retainerInvoice:	?
 		// finalInvoice: ?
-		proforma:		 in.options.proforma,
-		invoiceIdPrefix: in.options.invoiceIdPrefix,
-		paid:			 in.options.paid,
+		proforma:		 in.options.Proforma,
+		invoiceIdPrefix: in.options.InvoiceIdPrefix,
+		paid:			 in.options.Paid,
 	}
 }
 
