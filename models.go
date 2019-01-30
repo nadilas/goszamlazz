@@ -10,11 +10,92 @@ import (
 	"github.com/nadilas/goszamlazz/constants"
 )
 
-type Buyer struct {
+type BuyerOptions struct {
+	PostAddress PostAddress
+	Name        string
+	Country     string
+	Zip         string
+	City        string
+	Address     string
+	Email       string
+	SendEmail   bool
+	TaxNumber   string
+	TaxNumberEU string
+	Identifier  string
+	IssuerName  string
+	Phone       string
+	Comment     string
 }
 
-func (b *Buyer) generateXML() (error, string) {
+type BuyerXMLData struct {
+	XMLName     xml.Name
+	name        string `xml:"nev"`
+	country     string `xml:"orszag"`
+	zip         string `xml:"irsz"`
+	city        string `xml:"telepules"`
+	address     string `xml:"cim"`
+	email       string `xml:"email"`
+	sendEmail   bool   `xml:"sendEmail"`
+	taxNumber   string `xml:"adoszam"`
+	taxNumberEU string `xml:"adoszamEU"`
+	paName      string `xml:"postazasiNev"`
+	paCountry   string `xml:"postazasiOrszag"`
+	paZip       string `xml:"postazasiIrsz"`
+	paCity      string `xml:"postazasiTelepules"`
+	paAddress   string `xml:"postazasiCim"`
+	// vevoFokonyv TODO: not implemented yet
+	identifier string `xml:"azonosito"`
+	issuerName string `xml:"alairoNeve"`
+	phone      string `xml:"telefonszam"`
+	comment    string `xml:"megjegyzes"`
+}
+
+var defaultBuyerOptions = BuyerOptions{
+	PostAddress: PostAddress{},
+}
+
+type PostAddress struct {
+	Name    string
+	Country string
+	Zip     string
+	City    string
+	Address string
+}
+
+type Buyer struct {
+	Options BuyerOptions
+}
+
+func (buyer *Buyer) generateXML() (error, string) {
 	// todo
+	bdata := BuyerXMLData{
+		XMLName:     xml.Name{Local: "vevo"},
+		name:        buyer.Options.Name,
+		country:     "",
+		zip:         "",
+		city:        "",
+		address:     "",
+		email:       "",
+		sendEmail:   false,
+		taxNumber:   "",
+		taxNumberEU: "",
+		paName:      "",
+		paCountry:   "",
+		paZip:       "",
+		paCity:      "",
+		paAddress:   "",
+		identifier:  "",
+		issuerName:  "",
+		phone:       "",
+		comment:     "",
+	}
+	b := bytes.NewBufferString("")
+	enc := xml.NewEncoder(b)
+	enc.Indent("  ", "    ")
+	if err := enc.Encode(bdata); err != nil {
+		return err, ""
+	}
+
 	return nil, ""
 }
 
@@ -58,17 +139,17 @@ type Invoice struct {
 
 type InvoiceHeader struct {
 	XMLName         xml.Name
-	issueDate       time.Time	`json:"keltDatum"`
-	fulfillmentDate time.Time	`json:"teljesitesDatum"`
-	dueDate         time.Time	`json:"fizetesiHataridoDatum"`
-	paymentMethod   string		`json:"fizmod"`
-	currency        string		`json:"penznem"`
-	language        string		`json:"szamlaNyelve"`
-	comment         string		`json:"megjegyzes"`
-	orderNumber     string		`json:"rendelesSzam"`
-	proforma        bool		`json:"dijbekero"`
-	invoiceIdPrefix string		`json:"szamlaszamElotag"`
-	paid            bool		`json:"fizetve"`
+	issueDate       time.Time `json:"keltDatum"`
+	fulfillmentDate time.Time `json:"teljesitesDatum"`
+	dueDate         time.Time `json:"fizetesiHataridoDatum"`
+	paymentMethod   string    `json:"fizmod"`
+	currency        string    `json:"penznem"`
+	language        string    `json:"szamlaNyelve"`
+	comment         string    `json:"megjegyzes"`
+	orderNumber     string    `json:"rendelesSzam"`
+	proforma        bool      `json:"dijbekero"`
+	invoiceIdPrefix string    `json:"szamlaszamElotag"`
+	paid            bool      `json:"fizetve"`
 }
 
 func NewInvoice(opts InvoiceOptions) (*Invoice, error) {
@@ -135,12 +216,12 @@ func (in *Invoice) getHeader() (InvoiceHeader) {
 		comment:         in.options.Comment,
 		// exchangeRateBank:	?
 		// exchangeRate:	?
-		orderNumber:	 in.options.OrderNumber,
+		orderNumber: in.options.OrderNumber,
 		// retainerInvoice:	?
 		// finalInvoice: ?
-		proforma:		 in.options.Proforma,
+		proforma:        in.options.Proforma,
 		invoiceIdPrefix: in.options.InvoiceIdPrefix,
-		paid:			 in.options.Paid,
+		paid:            in.options.Paid,
 	}
 }
 
